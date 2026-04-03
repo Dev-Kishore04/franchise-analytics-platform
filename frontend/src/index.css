@@ -1,0 +1,541 @@
+/* ===================================================
+   Executive Insight — index.css
+   Vite + React + Tailwind CSS v3
+   =================================================== */
+
+/* ---------- Google Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+/* ---------- Tailwind Directives ---------- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- CSS Custom Properties ---------- */
+:root {
+  --color-background: #f7f9fb;
+  --color-surface: #f7f9fb;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f2f4f6;
+  --color-surface-container: #eceef0;
+  --color-surface-container-high: #e6e8ea;
+  --color-surface-container-highest: #e0e3e5;
+  --color-on-background: #191c1e;
+  --color-on-surface: #191c1e;
+  --color-on-surface-variant: #424656;
+  --color-outline: #737687;
+  --color-outline-variant: #c2c6d9;
+  --color-primary: #004bcb;
+  --color-primary-container: #0561ff;
+  --color-on-primary: #ffffff;
+  --color-secondary: #515f74;
+  --color-tertiary: #9d3000;
+  --color-tertiary-container: #c73f00;
+  --color-tertiary-fixed: #ffdbd0;
+  --color-error: #ba1a1a;
+  --sidebar-width: 16rem; /* 256px */
+  --topbar-height: 4rem;  /* 64px */
+}
+
+/* ---------- Base Resets ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-headline {
+  font-family: 'Manrope', sans-serif;
+}
+
+/* ---------- Material Symbols ---------- */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  vertical-align: middle;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.material-symbols-outlined.filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ---------- Layout ---------- */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  margin-left: var(--sidebar-width);
+  padding-top: var(--topbar-height);
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 50;
+  background-color: #f1f5f9; /* slate-100 */
+  border-right: 1px solid var(--color-outline-variant);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  overflow-y: auto;
+}
+
+.sidebar-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.75rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #64748b; /* slate-500 */
+  transition: background-color 0.2s, color 0.2s;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.sidebar-nav-link:hover {
+  background-color: #e2e8f0; /* slate-200 */
+  color: #0f172a; /* slate-900 */
+}
+
+.sidebar-nav-link.active {
+  color: #1d4ed8; /* blue-700 */
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-right: 4px solid #2563eb; /* blue-600 */
+}
+
+/* ---------- Top Bar ---------- */
+.topbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: calc(100% - var(--sidebar-width));
+  height: var(--topbar-height);
+  z-index: 40;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+}
+
+/* ---------- KPI Cards ---------- */
+.kpi-card {
+  background-color: var(--color-surface-container-lowest);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi-card-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: rgba(0, 75, 203, 0.1);
+}
+
+.kpi-card-progress-bar {
+  height: 100%;
+  border-radius: 0 2px 2px 0;
+  transition: width 1s ease-in-out;
+}
+
+/* ---------- Chart Containers ---------- */
+.chart-card {
+  background-color: var(--color-surface-container-lowest);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* ---------- Table Styles ---------- */
+.branch-table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.branch-table thead tr {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-on-surface-variant);
+  border-bottom: 1px solid var(--color-surface-container);
+}
+
+.branch-table thead th {
+  padding: 1rem 1.5rem;
+}
+
+.branch-table tbody tr {
+  border-bottom: 1px solid rgba(236, 238, 240, 0.3);
+  transition: background-color 0.15s;
+  cursor: pointer;
+}
+
+.branch-table tbody tr:hover {
+  background-color: var(--color-surface-container-low);
+}
+
+.branch-table tbody td {
+  padding: 1rem 1.5rem;
+}
+
+/* ---------- AI Insights Card ---------- */
+.ai-insights-card {
+  background-color: var(--color-surface-container-lowest);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border-left: 4px solid var(--color-tertiary);
+  box-shadow: 0 4px 20px rgba(157, 48, 0, 0.06);
+  height: 100%;
+}
+
+.ai-insight-item-primary {
+  background-color: var(--color-tertiary-fixed);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid rgba(157, 48, 0, 0.1);
+}
+
+.ai-insight-item {
+  background-color: var(--color-surface-container-low);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
+/* ---------- Alert Items ---------- */
+.alert-item {
+  display: flex;
+  gap: 1rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  transition: background-color 0.15s;
+  cursor: pointer;
+}
+
+.alert-item:hover {
+  background-color: var(--color-surface-container-low);
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-container));
+  color: white;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s;
+  box-shadow: 0 4px 14px rgba(0, 75, 203, 0.2);
+}
+
+.btn-primary:hover {
+  transform: scale(1.02);
+}
+
+.btn-primary:active {
+  transform: scale(0.95);
+}
+
+.btn-secondary {
+  background-color: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-surface-container-highest);
+}
+
+.btn-new-branch {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-container));
+  color: white;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 75, 203, 0.25);
+  transition: transform 0.15s;
+}
+
+.btn-new-branch:hover {
+  transform: scale(1.01);
+}
+
+.btn-new-branch:active {
+  transform: scale(0.97);
+}
+
+/* ---------- Search Bar ---------- */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #f8fafc; /* slate-50 */
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  width: 24rem;
+  transition: box-shadow 0.2s;
+}
+
+.search-bar:focus-within {
+  box-shadow: 0 0 0 3px rgba(0, 75, 203, 0.12);
+}
+
+.search-bar input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.875rem;
+  color: var(--color-on-surface);
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
+.search-bar input::placeholder {
+  color: #94a3b8;
+}
+
+/* ---------- Badge Variants ---------- */
+.badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.badge-green {
+  background-color: #f0fdf4;
+  color: #16a34a;
+}
+
+.badge-blue {
+  background-color: #eff6ff;
+  color: #2563eb;
+}
+
+.badge-slate {
+  background-color: #f8fafc;
+  color: #64748b;
+}
+
+/* ---------- Progress Bar (branch comparison) ---------- */
+.progress-track {
+  height: 0.75rem;
+  background-color: var(--color-surface-container);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: 9999px;
+  transition: width 1s ease;
+}
+
+/* ---------- Revenue Chart Columns ---------- */
+.chart-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+}
+
+.chart-bar {
+  width: 0.5rem;
+  background-color: var(--color-primary);
+  border-radius: 0.25rem 0.25rem 0 0;
+  transition: height 0.8s ease;
+}
+
+.chart-label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--color-on-surface-variant);
+  margin-top: 1rem;
+}
+
+/* ---------- Trend Badges ---------- */
+.trend-up {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #16a34a;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.trend-flat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--color-on-surface-variant);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.trend-down {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--color-error);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* ---------- AI Chat Button ---------- */
+.btn-ai-chat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background-color: rgba(199, 63, 0, 0.08);
+  color: var(--color-tertiary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-ai-chat:hover {
+  background-color: rgba(199, 63, 0, 0.14);
+}
+
+/* ---------- Notification Dot ---------- */
+.notif-dot {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--color-error);
+  border-radius: 9999px;
+  border: 2px solid white;
+}
+
+/* ---------- No-scrollbar utility ---------- */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ---------- Scrollbar Styling ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(115, 118, 135, 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(115, 118, 135, 0.5);
+}
+
+/* ---------- Utility: Section Title ---------- */
+.section-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-on-background);
+}
+
+.section-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-on-surface-variant);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
