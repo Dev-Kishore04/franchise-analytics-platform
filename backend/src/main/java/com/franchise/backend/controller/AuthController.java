@@ -65,6 +65,7 @@ public LoginResponseDTO login(
 
     return new LoginResponseDTO(
             token,
+            userDetails.getId(),
             userDetails.getUsername(),
             userDetails.getAuthorities()
                     .iterator()

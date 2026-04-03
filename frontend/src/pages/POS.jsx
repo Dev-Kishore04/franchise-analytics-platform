@@ -14,7 +14,7 @@ export default function POS() {
   const { user } = useAuth()
   const { data: products } = useApi(productApi.getAll)
   const { data: branches } = useApi(branchApi.getAll)
-
+  console.log(user)
   const { searchQuery } = useOutletContext()
 
   const menuRef = useRef(null)
@@ -148,7 +148,7 @@ export default function POS() {
 
       const payload = {
         branchId: selectedBranchId,
-        staffId: 1,
+        staffId: user.id,
         paymentMethod: paymentMethod.toUpperCase(),
         items: cartItems.map(i => ({
           productId: i.id,

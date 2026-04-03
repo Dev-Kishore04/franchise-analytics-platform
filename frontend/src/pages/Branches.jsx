@@ -21,14 +21,14 @@ export default function Branches() {
 
   const { user } = useAuth()
   const isManager = user?.role === "ROLEMANAGER"
-
+  console.log(user)
   const { searchQuery } = useOutletContext()
 
   const { data: branches, loading, refetch } = useApi(branchApi.getAll)
-
+  console.log(branches)
   const { data: branchInsight } = useApi(
-    () => analyticsApi.getBranchInsight(user?.branchId),
-    { enabled: isManager }
+    () => analyticsApi.getBranchInsight(user.branchId),
+    { enabled: isManager && !!user?.branchId }
   )
 
   const { format } = useCurrency()
@@ -166,7 +166,22 @@ export default function Branches() {
     setEditModalOpen(true)
   }
 
-  const handleEditBranch = async (id, form) => {
+  const handleCreateBranch = async (form) => {
+    try {
+      await branchApi.create({
+        name: form.name,
+        location: form.address,
+        status: form.status,
+        managerId: form.managerId || null
+      })
+
+      refetch()
+
+    } catch (err) {
+      console.error(err)
+    }
+  }
+    const handleEditBranch = async (id, form) => {
     try {
       await branchApi.update(id, form)
       refetch()
@@ -312,6 +327,7 @@ export default function Branches() {
 
       <CreateBranchModal
         open={modalOpen}
+        onConfirm={handleCreateBranch}
         onClose={() => setModalOpen(false)}
       />
 
