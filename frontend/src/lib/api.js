@@ -151,8 +151,10 @@ export const analyticsApi = {
   getUnderperformingBranches: () =>
     api.get("/api/analytics/underperforming").then(res => res.data),
   getRevenue: ()=> api.get('/api/analytics/total-revenue-30days').then((r)=> r.data),
-  getBranchInsight: (branchId) =>
-    api.get(`/api/analytics/branch-insight/${branchId}`).then(res => res.data),
+  getBranchInsight: (branchId) => {
+    if (!branchId) return Promise.resolve(null)
+    return api.get(`/api/analytics/branch-insight/${branchId}`).then(res => res.data)
+  },
 }
 
 // ─── AI Insights ──────────────────────────────────────────────────────────

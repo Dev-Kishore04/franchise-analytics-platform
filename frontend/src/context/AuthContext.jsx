@@ -14,6 +14,7 @@ export function AuthProvider({ children }) {
     // data = { token, email, role }
     localStorage.setItem('token', data.token)
     const userData = {
+      id: data.id,
       email: data.email,
       role: data.role,
       name: data.name ,
