@@ -14,7 +14,7 @@ export default function AlertWatcher() {
 
         const token = localStorage.getItem("token");
 
-        const res = await fetch("http://localhost:8080/api/alerts", {
+        const res = await fetch("https://franchise-analytics-platform.onrender.com/api/alerts", {
         headers: {
             Authorization: `Bearer ${token}`
         }
