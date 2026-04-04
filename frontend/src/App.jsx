@@ -77,7 +77,7 @@ function AppRoutes() {
         <Route
           path="staff"
           element={
-            <RoleRoute allowedRoles={["ROLEADMIN"]}>
+            <RoleRoute allowedRoles={["ROLEADMIN","ROLEMANAGER"]}>
               <Staff />
             </RoleRoute>
           }
