@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { branchApi } from '@/lib/api'
 import { useAuth } from '@/context/AuthContext'
 import CreateBranchModal from '@/components/branches/CreateBranchModal'
+import logo from '@/asset/logo-fap.png'
 
 const navItems = [
 
@@ -55,7 +56,7 @@ export default function Sidebar() {
       <div className="mb-8 px-2">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 overflow-hidden rounded-xl  flex items-center justify-center shadow-lg">
-            <img className='h-10 ' src="src/asset/logo fap.png" alt="" />
+            <img className='h-10 ' src={logo} alt="" />
           </div>
           <div>
             <h1 className="text-l font-bold text-slate-900 font-headline">

@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/context/AuthContext'
+import logo from '@/asset/logo-fap.png'
+
 
 export default function Login() {
   const { login } = useAuth()
@@ -30,7 +32,7 @@ export default function Login() {
         {/* Brand */}
         <div className="flex items-center gap-3 mb-10">
           <div className="w-10 h-10 rounded-xl flex overflow-hidden items-center justify-center">
-            <img className='h-10 scale-105' src="src/asset/logo fap.png" alt="" />
+            <img className='h-10 scale-105' src={logo} alt="" />
           </div>
           <div>
             <h1 className="text-l pb-0.5 font-bold font-headline text-on-surface">Franchise Analytics Platform</h1>
