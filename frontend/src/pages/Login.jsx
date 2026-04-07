@@ -29,11 +29,11 @@ export default function Login() {
       <div className="bg-surface-container-lowest rounded-2xl shadow-xl p-10 w-full max-w-md">
         {/* Brand */}
         <div className="flex items-center gap-3 mb-10">
-          <div className="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center">
-            <span className="material-symbols-outlined text-white" style={{ fontVariationSettings: "'FILL' 1" }}>insights</span>
+          <div className="w-10 h-10 rounded-xl flex overflow-hidden items-center justify-center">
+            <img className='h-10 scale-105' src="src/asset/logo fap.png" alt="" />
           </div>
           <div>
-            <h1 className="text-xl font-bold font-headline text-on-surface">Executive Insight</h1>
+            <h1 className="text-l pb-0.5 font-bold font-headline text-on-surface">Franchise Analytics Platform</h1>
             <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Franchise Management</p>
           </div>
         </div>
