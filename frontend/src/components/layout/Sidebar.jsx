@@ -54,17 +54,12 @@ export default function Sidebar() {
       {/* Brand */}
       <div className="mb-8 px-2">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center shadow-lg">
-            <span
-              className="material-symbols-outlined text-white text-2xl filled"
-              style={{ fontVariationSettings: "'FILL' 1" }}
-            >
-              insights
-            </span>
+          <div className="w-10 h-10 overflow-hidden rounded-xl  flex items-center justify-center shadow-lg">
+            <img className='h-10 ' src="src/asset/logo fap.png" alt="" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-slate-900 font-headline">
-              Executive Insight
+            <h1 className="text-l font-bold text-slate-900 font-headline">
+             Analytics Platfrom
             </h1>
             <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold">
               Franchise Management
