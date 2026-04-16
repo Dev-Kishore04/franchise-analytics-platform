@@ -11,7 +11,16 @@ const api = axios.create({
 // Attach JWT token to every request
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
-  if (token) config.headers.Authorization = `Bearer ${token}`
+
+  // Do not attach token for login/register
+  if (
+    token &&
+    !config.url.includes('/api/auth/login') &&
+    !config.url.includes('/api/auth/register')
+  ) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+
   return config
 })
 

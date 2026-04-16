@@ -96,11 +96,9 @@ public class InsightService {
             Map<String, Object> analyticsData = analyticsService.getAIAnalyticsData();
             String analyticsJson = objectMapper.writeValueAsString(analyticsData);
 
-            // Step 1: Find underperforming branches
             List<BranchRankingDTO> underperforming =
                     analyticsService.getUnderperformingBranches();
 
-            // Step 2: Count existing insights
             long existingInsights = insightRepository.count();
 
             int remainingSlots = (int) (8 - existingInsights);
@@ -110,7 +108,6 @@ public class InsightService {
                 return;
             }
 
-            // Step 3: Filter branches that already have insights
             List<Long> branchesToAnalyze = underperforming.stream()
                     .map(BranchRankingDTO::getBranchId)
                     .filter(branchId -> !insightRepository.existsByBranchId(branchId))
@@ -123,40 +120,62 @@ public class InsightService {
             }
 
             String prompt = """
-            You are an expert franchise performance analyst.
+            You are a senior franchise performance analyst.
+
+            Your job is to identify the MOST critical operational problem for each branch using the analytics data.
 
             ONLY analyze the following branch IDs:
             %s
 
-            Rules:
+            Strict Rules:
 
-            1. Generate EXACTLY one insight per branchId
-            2. Do NOT generate multiple insights for the same branch
-            3. give only one insight for every branch id
-            4. Maximum insights equals the number of branches provided
-            5. Use the most critical performance problem for each branch
-            6. Use numeric metrics from analytics data
-            7. use branch name in every insight
-            8. Provide a clear actionable recommendation
-           
+            1. Generate EXACTLY one insight for each branchId listed above.
+            2. Do NOT generate multiple insights for the same branch.
+            3. Use the analytics data to determine the MOST significant performance issue.
+            4. Each insight must reference REAL NUMERIC METRICS from the analytics data.
+            5. The description MUST clearly mention the branch name.
+            6. The description must explain:
+               - what the problem is
+               - which metric proves the problem
+               - why it may be happening.
+            7. Avoid vague insights like "performance is low".
+            8. Insights should focus on meaningful operational issues such as:
+               - low revenue
+               - poor product sales
+               - excess inventory
+               - low order volume
+               - inefficient staffing
+               - poor product diversity
+            9. Recommendations MUST be practical operational actions that management can implement.
+            10. Use concise but clear explanations.
 
             Return ONLY valid JSON.
 
-            Format:
+            JSON format:
 
             {
-            "insights":[
+              "insights":[
                 {
-                "branchId":0,
-                "metric":"",
-                "value":0,
-                "description":"",
-                "recommendation":"",
-                "impactLevel":"High|Medium|Low",
-                "category":"Sales|Inventory|Staffing|Efficiency"
+                  "branchId":0,
+                  "metric":"",
+                  "value":0,
+                  "description":"",
+                  "recommendation":"",
+                  "impactLevel":"High|Medium|Low",
+                  "category":"Sales|Inventory|Staffing|Efficiency"
                 }
-            ]
+              ]
             }
+
+            Insight writing guidelines:
+
+            - Always mention the branch name inside the description.
+            - Always mention the metric and its numeric value.
+            - Example description:
+              "Branch Downtown Cafe shows low average order value of 3.2 compared to other branches above 5.0, indicating weak upselling or product mix."
+
+            - Example recommendation:
+              "Introduce combo bundles and train staff in upselling to increase average order value."
 
             Analytics Data:
             %s
@@ -202,14 +221,11 @@ public class InsightService {
             List<InsightDTO> insights =
                     aiResponse.getInsights().stream().limit(remainingSlots).toList();
 
-           
-
             for (InsightDTO dto : insights) {
 
                 if (dto.getBranchId() == null) continue;
 
                 if (!branchesToAnalyze.contains(dto.getBranchId())) continue;
-
 
                 AIInsight insight = new AIInsight();
 

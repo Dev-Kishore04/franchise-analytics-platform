@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { branchApi } from '@/lib/api'
 import { useAuth } from '@/context/AuthContext'
 import CreateBranchModal from '@/components/branches/CreateBranchModal'
-import logo from '@/asset/logo-fap.png'
+import logo from '@/asset/Untitled-1.png'
 
 const navItems = [
 
