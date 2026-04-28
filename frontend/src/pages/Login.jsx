@@ -83,7 +83,7 @@ export default function Login() {
           </button>
         </form>
         {/* Demo Note */}
-        <div className="mt-6 p-4 bg-surface-container-low rounded-lg text-xs text-on-surface-variant">
+        <div className="mt-6 p-4 bg-surface-container-low rounded-lg text-xs text-on-surface-variant text-center flex flex-col items-center">
           <p className="font-semibold mb-1 text-on-surface">Demo Access</p>
           <p>
             Email: <span className="font-mono font-medium">kishore062922@gmail.com</span><br/>
