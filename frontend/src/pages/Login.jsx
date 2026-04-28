@@ -82,6 +82,18 @@ export default function Login() {
             {loading ? 'Signing in…' : 'Sign In'}
           </button>
         </form>
+        {/* Demo Note */}
+        <div className="mt-6 p-4 bg-surface-container-low rounded-lg text-xs text-on-surface-variant">
+          <p className="font-semibold mb-1 text-on-surface">Demo Access</p>
+          <p>
+            Email: <span className="font-mono font-medium">kishore062922@gmail.com</span><br/>
+            Password: <span className="font-mono font-medium">0410</span>
+          </p>
+        
+          <p className="mt-3 text-[11px] opacity-80">
+            Note: The first login may take a short while because the backend is hosted on a free service and may need time to wake up (cold start).
+          </p>
+        </div>
       </div>
     </div>
   )
