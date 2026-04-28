@@ -1,4 +1,4 @@
-Franchise Management & AI-Assisted Decision Support System
+Franchise Management & AI-Assisted Decision Support System | https://franchise-analytics-platform.vercel.app/
 
 A full-stack web platform designed to manage multi-branch franchise operations with real-time analytics, operational monitoring, and AI-assisted business insights.
 
